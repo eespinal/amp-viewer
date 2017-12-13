@@ -105,20 +105,34 @@
     <container id="viewerHost"></container>
   </viewer>
   <ampdoc url="https://www.newyorker.com/news/our-columnists/the-best-response-to-trumps-fake-news-gibes-keep-reporting/amp">
-    Click me I'm a TNY article AMP doc
+    1. Click me I'm a TNY article AMP doc
+  </ampdoc>
+  <ampdoc url="https://www.newyorker.com/humor/borowitz-report/devastated-roy-moore-consoles-himself-by-heading-to-mall/amp">
+    2. Click me I'm a TNY article AMP doc
+  </ampdoc>
+  <ampdoc url="https://www.newyorker.com/culture/photo-booth/the-photographer-behind-the-cat-person-image-on-capturing-a-bad-kiss/amp">
+    3. Click me I'm a TNY article AMP doc
+  </ampdoc>
+  <ampdoc url="https://www.newyorker.com/news/daily-comment/how-doug-jones-beat-roy-moore/amp">
+    4. Click me I'm a TNY article AMP doc
+  </ampdoc> 
+  <ampdoc url="http://www.newyorker.com/humor/daily-shouts/what-conversations-about-bitcoin-sound-like-to-me/amp">
+    5. Click me I'm a TNY article AMP doc
   </ampdoc>
 </body>
 
 <script>
   var viewerEl = document.getElementsByTagName("viewer")[0];
-  var ampDocEl = document.getElementsByTagName("ampdoc")[0];
-  var viewer;
+  var ampDocs = document.getElementsByTagName("ampdoc");
+  // var viewer;
   function initViewer() {
-    var ampDocUrl = ampDocEl.getAttribute('url');
-    var viewerHost = document.getElementById('viewerHost');
-    viewer = new Viewer(viewerHost, ampDocUrl);
-    viewer.setViewerShowAndHide(showViewer, hideViewer, isViewerHidden);
-    ampDocEl.addEventListener('click', openAmpDocInViewer);
+    for (var ampDocEl of ampDocs) {
+      var ampDocUrl = ampDocEl.getAttribute('url');
+      var viewerHost = document.getElementById('viewerHost');
+      var viewer = new Viewer(viewerHost, ampDocUrl);
+      viewer.setViewerShowAndHide(showViewer, hideViewer, isViewerHidden);
+      ampDocEl.addEventListener('click', openAmpDocInViewer(viewer));
+    }
   }
   function hideViewer() {
     viewerEl.classList.add('hidden');
@@ -129,9 +143,11 @@
   function isViewerHidden() {
     return viewerEl.classList.contains('hidden');
   }
-  function openAmpDocInViewer() {
-    viewer.attach();
-    showViewer();
+  function openAmpDocInViewer(viewer) {
+    return function () {
+      viewer.attach();
+      showViewer();
+    };
   }
   window.onload = initViewer();
 </script>
