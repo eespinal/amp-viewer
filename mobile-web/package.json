@@ -27,6 +27,7 @@
     "minimist": "1.2.0",
     "mocha": "^3.4.2",
     "punycode": "^2.1.0",
+    "puppeteer": "^0.13.0",
     "run-sequence": "^1.2.2",
     "sinon": "^2.3.4",
     "sinon-chai": "^2.11.0",
