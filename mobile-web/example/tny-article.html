@@ -145,6 +145,11 @@
   }
   function openAmpDocInViewer(viewer) {
     return function () {
+      // Remove old visited pages
+      for (var frame of viewerHost.getElementsByTagName('iframe')) {
+        frame.remove();
+      }
+
       viewer.attach();
       showViewer();
     };
